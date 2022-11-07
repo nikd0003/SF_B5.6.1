@@ -26,8 +26,6 @@ def take_input(player_token):    #
         player_answer = player_answer.replace(',', '')
         player_answer = player_answer.replace(' ', '')
         length_player_answer = len(player_answer)
-#        if 3 <= length_player_answer <=1:
-#            print(f"Координаты состоят из двух цифр!")
         if player_answer in dict_coord:
             player_answer = dict_coord[player_answer]
         else:
