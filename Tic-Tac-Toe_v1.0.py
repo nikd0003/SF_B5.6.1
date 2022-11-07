@@ -17,7 +17,7 @@ def draw_board(board):    # drowing board
         print(f"{i}  {board[0 + i * 3]}  {board[1 + i * 3]}  {board[2 + i * 3]}")
 
 
-def take_input(player_token):    # check input for errors
+def take_input(player_token):    #
     valid = False
     while not valid:
         player_answer = input(f"""Вводите координаты через \' \' или \',\'. Первая цифра - строка, вторая - столбец.
@@ -25,6 +25,9 @@ def take_input(player_token):    # check input for errors
 Куда поставим {player_token} ? """)
         player_answer = player_answer.replace(',', '')
         player_answer = player_answer.replace(' ', '')
+        length_player_answer = len(player_answer)
+#        if 3 <= length_player_answer <=1:
+#            print(f"Координаты состоят из двух цифр!")
         if player_answer in dict_coord:
             player_answer = dict_coord[player_answer]
         else:
@@ -34,7 +37,7 @@ def take_input(player_token):    # check input for errors
         except:
             print("Некорректный ввод. Вы уверены, что ввели число?")
             continue
-        if 0 <= player_answer <= 8:
+        if 0 <= player_answer <= 8 and length_player_answer == 2:
             if(str(board[player_answer]) not in "XO"):
                 board[player_answer] = player_token
                 valid = True
@@ -44,7 +47,7 @@ def take_input(player_token):    # check input for errors
             print("Некорректный ввод. Вводите цифры 0, 1 или 2.")
 
 
-def check_win(board):    # check step for a win
+def check_win(board):
     win_coord = ((0, 1, 2), (3, 4, 5), (6, 7, 8), (0, 3, 6), (1, 4, 7), (2, 5, 8), (0, 4, 8), (2, 4, 6))
     for each in win_coord:
         if board[each[0]] == board[each[1]] == board[each[2]] != "-":
@@ -53,7 +56,7 @@ def check_win(board):    # check step for a win
     return False
 
 
-def main(board):    # root function in game
+def main(board):
     counter = 0
     win = False
     while not win:
@@ -68,8 +71,8 @@ def main(board):    # root function in game
             if tmp:
                 draw_board(board)
                 print("\n")
-                print(f"*" * 26, f"\n***   {tmp} {tmp} {tmp}  выиграл!  ***")
-                print(f"*" * 26)
+                print(f"*" * 29, f"\n***   {tmp}! {tmp}! {tmp}!  выиграл!  ***")
+                print(f"*" * 29)
                 win = True
                 return
         if counter == 9:
